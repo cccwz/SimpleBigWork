@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>可复用区域</title>
+</head>
+<body>
+<header  th:fragment="header">
+    <div style="width: 100% ;height: 80px;background:aliceblue"  >
+        <span>登陆用户：</span>
+        <span th:text="${loginUser.account}">xx</span>,权限为
+        <span th:text="${loginUser.type==1?'普通用户':'管理员'}">xxx</span>
+        <a th:href="@{/logout}">退出</a>
+    </div>
+
+    <div style="width: 100% ;height: 120px;background:cornflowerblue"  >
+        <div style="height: 100px ;width: 100px;display: inline-block">
+            <a style="font-size:25px" th:href="@{/projectSearch}">查询列表</a>
+        </div>
+        <div style="height: 100px ;width: 100px;display: inline-block"></div>
+
+
+        <div style="height: 100px ;width: 100px;display: inline-block">
+            <span th:if="${loginUser.type==0}">
+                <a style="font-size:25px" th:href="@{/userList}">用户列表</a>
+            </span>
+        </div>
+        <div style="height: 100px ;width: 100px;display: inline-block"></div>
+        <div style="height: 100px ;width: 100px;display: inline-block">
+            <span th:if="${loginUser.type==0}">
+                <a style="font-size:25px" th:href="@{/addProject}">增加项目</a>
+            </span>
+        </div>
+        <div style="height: 100px ;width: 100px;display: inline-block"></div>
+        <div style="height: 100px ;width: 100px;display: inline-block">
+            <span th:if="${loginUser.type==0}">
+                <a style="font-size:25px" th:href="@{/addLocation}">增加场址</a>
+            </span>
+        </div>
+    </div>
+
+</header>
+</body>
+</html>

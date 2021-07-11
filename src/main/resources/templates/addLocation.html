@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>增加场址</title>
+    <!--<script src="lib/js/address.js"></script>-->
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+
+
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+<form method="post" th:action="@{/addLocation}">
+    <span>项目名称</span><input type="text" name="projectName"><br>
+    <select id="cmbProvince" name="province"></select><br>
+    <select id="cmbCity" name="city"></select><br>
+    <select id="cmbArea" name="county"></select><br>
+    <span>位置</span><input type="text" name="location"><br>
+    <span>特征</span><input type="text" name="feature"><br>
+    <span>安装容量</span><input type="text" name="capcity"><br>
+    <span>用地面积</span><input type="text" name="area"><br>
+    <span>海拔高度</span><input type="text" name="height"><br>
+    <span>经度</span><input type="text" name="longitude"><br>
+    <span>纬度</span><input type="text" name="latitude"><br>
+    <span>水平太阳辐射</span><input type="text" name="radiation"><br>
+    <span>最佳辐射量倾角</span><input type="text" name="angle"><br>
+    <span>平均温度</span><input type="text" name="avgT"><br>
+    <span>最高温度</span><input type="text" name="maxT"><br>
+    <span>最低温度</span><input type="text" name="minT"><br>
+    <span>多年最大冻土深度</span><input type="text" name="depth"><br>
+    <span>多年平均风速</span><input type="text" name="avgWindspeed"><br>
+    <span>多年极大风速</span><input type="text" name="maxWindspeed" ><br>
+    <input type="submit" value="增加新场址">
+</form>
+
+<script th:src="@{/lib/js/address.js}"></script>
+<script type="text/javascript">addressInit('cmbProvince', 'cmbCity', 'cmbArea');</script>
+</body>
+</html>

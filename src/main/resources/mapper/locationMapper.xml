@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.chen.bigwork.dao.LocationMapper">
+    <sql id="selectFields">
+        id,project_name,province,city,county,location,
+        feature,capcity,area,height,longitude,latitude,
+        radiation,angle,avg_t,max_t,min_t,depth,
+        avg_windspeed,max_windspeed
+    </sql>
+    <sql id="insertFields">
+        project_name,province,city,county,location,
+        feature,capcity,area,height,longitude,latitude,
+        radiation,angle,avg_t,max_t,min_t,depth,
+        avg_windspeed,max_windspeed
+    </sql>
+    <insert id="insertLocation" parameterType="com.chen.bigwork.entities.Location" keyProperty="id">
+          insert into location (<include refid="insertFields"></include>)
+          values(
+          #{projectName},#{province},#{city},#{county},#{location},
+          #{feature},#{capcity},#{area},#{height},#{longitude},#{latitude},
+          #{radiation},#{angle},#{avgT},#{maxT},#{minT},#{depth},
+          #{avgWindspeed},#{maxWindspeed}
+        )
+    </insert>
+    <update id="updateLocation">
+        update location set project_name=#{projectName},province=#{province},city=#{city},county=#{county},
+        location=#{location},feature=#{feature},capcity=#{capcity},area=#{area},height=#{height},longitude=#{longitude},
+        latitude=#{latitude},radiation=#{radiation},angle=#{angle},avg_t=#{avgT},max_t=#{maxT},min_t=#{minT},
+        depth=#{depth},avg_windspeed=#{avgWindspeed},max_windspeed=#{maxWindspeed}
+        where id=#{id}
+    </update>
+    <update id="updateLocationProjectName">
+        update location set project_name=#{projectName}
+        where id=#{id}
+    </update>
+    <delete id="deleteLocationById">
+        delete from location
+        where id=#{id}
+    </delete>
+    <select id="findLocationByPlace" resultType="com.chen.bigwork.entities.Location">
+        select <include refid="selectFields"></include>
+        from location
+        where 1=1
+        <if test="province !=null and province!=''">
+            and province=#{province}
+        </if>
+        <if test="city !=null and city!=''">
+            and city=#{city}
+        </if>
+        <if test="county !=null and county!=''">
+            and county=#{county}
+        </if>
+    </select>
+    <select id="selectLocationByProjectName" resultType="com.chen.bigwork.entities.Location">
+        select <include refid="selectFields"></include>
+        from location
+        where project_name=#{projectName}
+    </select>
+    <select id="selectLocationById" resultType="com.chen.bigwork.entities.Location">
+        select  <include refid="selectFields"></include>
+        from location
+        where id=#{id}
+    </select>
+    <select id="selectLocationbyProjectNameExceptId" resultType="com.chen.bigwork.entities.Location">
+        select <include refid="selectFields"></include>
+        from location
+        where id != #{id}
+    </select>
+</mapper>

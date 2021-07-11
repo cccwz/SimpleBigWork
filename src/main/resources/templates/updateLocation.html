@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改场址</title>
+    <!--<script src="lib/js/address.js"></script>-->
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+
+<!--初始值-->
+<div style="height: 100px ;width: 100%;display: inline-block">
+    <a style="font-size:25px" >修改页面（只需输入需要修改的选项，不输入默认为不修改）</a><br><br>
+    <span style="font-size:25px" >原始值：</span>
+</div>
+<table class="table table-hover" style="text-align:center" border="1">
+
+    <thead th:if="${location!=null}">
+    <tr>
+        <th>场址id</th>
+        <th >项目名</th>
+        <th>省</th>
+        <th>市</th>
+        <th>县</th>
+        <th>位置</th>
+        <th>特征</th>
+        <th>安装容量</th>
+        <th>用地面积</th>
+        <th>海拔高度</th>
+        <th>经度</th>
+        <th>纬度</th>
+        <th>水平太阳辐射</th>
+        <th>最佳辐射量倾角</th>
+        <th>平均温度</th>
+        <th>最高温度</th>
+        <th>最低温度</th>
+        <th>多年最大冻土深度</th>
+        <th>多年平均风速</th>
+        <th>多年极大风速</th>
+    </tr>
+    </thead>
+    <tbody th:if="${location!=null}">
+    <tr >
+        <td th:text="${location.id}"></td>
+        <td >
+            <a th:text="${location.projectName}" ></a>
+        </td>
+        <td th:text="${location.province}"></td>
+        <td th:text="${location.city}"></td>
+        <td th:text="${location.county}"></td>
+        <td th:text="${location.location}"></td>
+        <td th:text="${location.feature}"></td>
+        <td th:text="${location.capcity}"></td>
+        <td th:text="${location.area}"></td>
+        <td th:text="${location.height}"></td>
+        <td th:text="${location.longitude}"></td>
+        <td th:text="${location.latitude}"></td>
+        <td th:text="${location.radiation}"></td>
+        <td th:text="${location.angle}"></td>
+        <td th:text="${location.avgT}"></td>
+        <td th:text="${location.maxT}"></td>
+        <td th:text="${location.minT}"></td>
+        <td th:text="${location.depth}"></td>
+        <td th:text="${location.avgWindspeed}"></td>
+        <td th:text="${location.maxWindspeed}"></td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+<form method="post" th:action="@{/updateLocation}">
+    <input type="hidden" name="id" th:value="${location.id}">
+
+    <span>项目名称</span><input type="text" name="projectName"><br>
+    <select id="cmbProvince" name="province"></select><br>
+    <select id="cmbCity" name="city"></select><br>
+    <select id="cmbArea" name="county"></select><br>
+    <span>位置</span><input type="text" name="location"><br>
+    <span>特征</span><input type="text" name="feature"><br>
+    <span>安装容量</span><input type="text" name="capcity"><br>
+    <span>用地面积</span><input type="text" name="area"><br>
+    <span>海拔高度</span><input type="text" name="height"><br>
+    <span>经度</span><input type="text" name="longitude"><br>
+    <span>纬度</span><input type="text" name="latitude"><br>
+    <span>水平太阳辐射</span><input type="text" name="radiation"><br>
+    <span>最佳辐射量倾角</span><input type="text" name="angle"><br>
+    <span>平均温度</span><input type="text" name="avgT"><br>
+    <span>最高温度</span><input type="text" name="maxT"><br>
+    <span>最低温度</span><input type="text" name="minT"><br>
+    <span>多年最大冻土深度</span><input type="text" name="depth"><br>
+    <span>多年平均风速</span><input type="text" name="avgWindspeed"><br>
+    <span>多年极大风速</span><input type="text" name="maxWindspeed" ><br>
+    <input type="submit" value="提交修改信息">
+</form>
+
+<script th:src="@{/lib/js/address.js}"></script>
+<script type="text/javascript">addressInit('cmbProvince', 'cmbCity', 'cmbArea');</script>
+</body>
+</html>

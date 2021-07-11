@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询主页面</title>
+    <script th:src="@{/lib/js/address.js}"></script>
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+
+<form method="post" th:action="@{/getLocationInfo}">
+    <select id="cmbProvince" name="province" ></select>
+    <select id="cmbCity" name="city"></select>
+    <select id="cmbArea" name="county"></select>
+    <input type="submit"value="提交">
+</form>
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+<table class="table table-hover" style="text-align:center" border="1">
+
+    <thead th:if="${locations!=null}">
+    <tr>
+        <th>场址id</th>
+        <th >项目名</th>
+        <th>省</th>
+        <th>市</th>
+        <th>县</th>
+        <th>位置</th>
+        <th>特征</th>
+        <th>安装容量</th>
+        <th>用地面积</th>
+        <th>海拔高度</th>
+        <th>经度</th>
+        <th>纬度</th>
+        <th>水平太阳辐射</th>
+        <th>最佳辐射量倾角</th>
+        <th>平均温度</th>
+        <th>最高温度</th>
+        <th>最低温度</th>
+        <th>多年最大冻土深度</th>
+        <th>多年平均风速</th>
+        <th>多年极大风速</th>
+        <span th:if="${loginUser.type==0}"><th>修改</th>
+            <th>删除</th></span>
+    </tr>
+    </thead>
+    <tbody th:if="${locations!=null}">
+<!--    <a th:href="@{|/getProjectInfo/${location.projectName}|}">ssss</a>-->
+    <tr th:each="location: ${locations}">
+        <td th:text="${location.id}"></td>
+        <td >
+            <a th:text="${location.projectName}" th:href="@{|/getProjectInfo/${location.projectName}|}">
+                </a>
+        </td>
+        <td th:text="${location.province}"></td>
+        <td th:text="${location.city}"></td>
+        <td th:text="${location.county}"></td>
+        <td th:text="${location.location}"></td>
+        <td th:text="${location.feature}"></td>
+        <td th:text="${location.capcity}"></td>
+        <td th:text="${location.area}"></td>
+        <td th:text="${location.height}"></td>
+        <td th:text="${location.longitude}"></td>
+        <td th:text="${location.latitude}"></td>
+        <td th:text="${location.radiation}"></td>
+        <td th:text="${location.angle}"></td>
+        <td th:text="${location.avgT}"></td>
+        <td th:text="${location.maxT}"></td>
+        <td th:text="${location.minT}"></td>
+        <td th:text="${location.depth}"></td>
+        <td th:text="${location.avgWindspeed}"></td>
+        <td th:text="${location.maxWindspeed}"></td>
+        <span th:if="${loginUser.type==0}"><td><a th:href="@{|/updateLocation/${location.id}|}">修改</a></td>
+            <td><a th:href="@{|/deleteLocation/${location.id}|}">删除</a></td></span>
+    </tr>
+
+    </tbody>
+
+</table>
+
+
+<script type="text/javascript">addressInit('cmbProvince', 'cmbCity', 'cmbArea');</script>
+
+</body>
+</html>

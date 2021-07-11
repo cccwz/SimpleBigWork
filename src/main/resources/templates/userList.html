@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+
+<table class="table table-hover" style="text-align:center" border="1">
+
+    <thead>
+    <tr>
+        <th>用户id</th>
+        <th >账号</th>
+        <th>密码</th>
+        <th>权限类型</th>
+
+    </tr>
+    </thead>
+    <tbody th:if="${userList!=null}">
+    <tr th:each="user: ${userList}">
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.account}"></td>
+        <td th:text="${user.password}"></td>
+        <td th:text="${user.type==1?'普通用户':'管理员'}"></td>
+    </tr>
+
+    </tbody>
+
+</table>
+
+</body>
+</html>

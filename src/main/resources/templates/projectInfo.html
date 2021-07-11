@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>项目详细信息</title>
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+<table class="table table-hover" style="text-align:center" border="1">
+    <thead>
+    <tr>
+        <th>项目id</th>
+        <th >项目名</th>
+        <th>项目类型</th>
+        <th>项目阶段</th>
+        <th>施工单位（光伏区）</th>
+        <th>施工单位（升压站）</th>
+        <th>日期</th>
+        <span th:if="${loginUser.type==0}"><th>修改</th>
+            <th>删除</th></span>
+    </tr>
+    </thead>
+    <tbody th:if="${project!=null}">
+    <tr >
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.type}"></td>
+        <td th:text="${project.stage}"></td>
+        <td th:text="${project.organizationLight}"></td>
+        <td th:text="${project.organizationPressure}"></td>
+        <td th:text="${#dates.format(project.date,'yyyy-MM')}"></td>
+        <span th:if="${loginUser.type==0}"><td><a th:href="@{|/updateProject/${project.id}|}">修改</a></td>
+            <td><a th:href="@{|/deleteProject/${project.id}|}">删除</a></td></span>
+    </tr>
+<!--    ${#dates.format(project.date,'yyyy-MM-dd HH:mm:ss')}-->
+    </tbody>
+</table>
+</body>
+</html>

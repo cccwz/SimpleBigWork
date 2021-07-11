@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>修改项目</title>
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+<!--初始值-->
+<div style="height: 100px ;width: 100%;display: inline-block">
+    <a style="font-size:25px" >修改页面（只需输入需要修改的选项，不输入默认为不修改）</a><br><br>
+    <span style="font-size:25px" >原始值：</span>
+</div>
+
+
+<table class="table table-hover" style="text-align:center" border="1">
+    <thead>
+    <tr>
+        <th>项目id</th>
+        <th >项目名</th>
+        <th>项目类型</th>
+        <th>项目阶段</th>
+        <th>施工单位（光伏区）</th>
+        <th>施工单位（升压站）</th>
+        <th>日期</th>
+    </tr>
+    </thead>
+    <tbody th:if="${project!=null}">
+    <tr >
+        <td th:text="${project.id}"></td>
+        <td th:text="${project.name}"></td>
+        <td th:text="${project.type}"></td>
+        <td th:text="${project.stage}"></td>
+        <td th:text="${project.organizationLight}"></td>
+        <td th:text="${project.organizationPressure}"></td>
+        <td th:text="${#dates.format(project.date,'yyyy-MM')}"></td>
+    </tr>
+    <!--    ${#dates.format(project.date,'yyyy-MM-dd HH:mm:ss')}-->
+    </tbody>
+</table>
+
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+
+<form method="post" th:action="@{/updateProject}">
+    <input type="hidden" name="id" th:value="${project.id}">
+    项目名：<input type="text" name="name"><br>
+
+    项目类型：<select name="type">
+    <option value="待定">待定</option>
+    <option value="山顶光伏">山地光伏</option>
+    <option value="平地光伏">平地光伏</option>
+    <option value="屋顶光伏">屋顶光伏</option>
+</select><br>
+
+    项目阶段：<select name="stage">
+    <option value="待定">待定</option>
+    <option value="可研">可研</option>
+    <option value="初设">初设</option>
+    <option value="施工图">施工图</option>
+    <option value="技术评判">技术评判</option>
+    <option value="后评价">后评价</option>
+</select><br>
+
+    施工单位（光伏区）：<input type="text" name="organizationLight"><br>
+    施工单位（升压区）：<input type="text" name="organizationPressure"><br>
+    日期：<input type="date" name="date"><br>
+    <input type="submit" value="提交修改信息">
+</form>
+</body>
+</html>

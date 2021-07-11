@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>登陆页面</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/lib/css/signin.css}">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <form class="form-signin" method="post" th:action="@{/login}" >
+        <h2 class="form-signin-heading">光伏电站管理系统</h2>
+        <label for="username" class="sr-only">用户名</label>
+
+        <input type="text" class="form-control" placeholder="请输入账号" required autofocus name="account" id="username">
+        <div th:if="${accountMsg!=null}">
+            <div  th:text="${accountMsg}">
+                该账号不存在!
+            </div>
+        </div>
+        <label for="password" class="sr-only">密码</label>
+        <input type="password" name="password" class="form-control" placeholder="请输入密码" id="password">
+        <div th:if="${passwordMsg!=null}">
+            <div  th:text="${passwordMsg}">
+                xxxx
+            </div>
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+    </form>
+</div>
+</body>
+</html>

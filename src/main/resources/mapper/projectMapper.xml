@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.chen.bigwork.dao.ProjectMapper">
+<sql id="selectFields">
+    id,name,type,stage,organization_light,organization_pressure,date
+</sql>
+    <sql id="insertFields">
+    name,type,stage,organization_light,organization_pressure,date
+</sql>
+
+    <insert id="insertProject" keyProperty="id">
+        insert into project (<include refid="insertFields"></include>)
+        values (#{name},#{type},#{stage},#{organizationLight},#{organizationPressure},#{date})
+    </insert>
+    <update id="updateProject">
+        update project set name=#{name},type=#{type},stage=#{stage},
+        organization_light=#{organizationLight},organization_pressure=#{organizationPressure}
+        ,date=#{date}
+        where id=#{id}
+    </update>
+    <delete id="deleteProjectById">
+        delete from project
+        where id=#{id}
+    </delete>
+    <select id="findProjectByName" resultType="com.chen.bigwork.entities.Project">
+select <include refid="selectFields"></include>
+from project
+where name=#{name}
+    </select>
+    <select id="selectProjectById" resultType="com.chen.bigwork.entities.Project">
+        select <include refid="selectFields"></include>
+        from project
+        where id=#{id}
+    </select>
+    <select id="selectProjectByNameExceptId" resultType="com.chen.bigwork.entities.Project">
+        select <include refid="selectFields"></include>
+        from project
+        where id!=#{id} and name=#{name}
+    </select>
+</mapper>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>增加项目</title>
+</head>
+<body>
+<header  th:replace="commom::header"></header>
+
+<div style="width: 200px;height: 50px;background-color: red" th:if="${msg!=null}">
+    <span th:text="${msg}">xxx</span>
+</div>
+
+<form method="post" th:action="@{/addProject}">
+    项目名：<input type="text" name="name"><br>
+
+    项目类型：<select name="type">
+    <option value="待定">待定</option>
+    <option value="山顶光伏">山地光伏</option>
+    <option value="平地光伏">平地光伏</option>
+    <option value="屋顶光伏">屋顶光伏</option>
+             </select><br>
+
+    项目阶段：<select name="stage">
+    <option value="待定">待定</option>
+    <option value="可研">可研</option>
+    <option value="初设">初设</option>
+    <option value="施工图">施工图</option>
+    <option value="技术评判">技术评判</option>
+    <option value="后评价">后评价</option>
+             </select><br>
+
+    施工单位（光伏区）：<input type="text" name="organizationLight"><br>
+    施工单位（升压区）：<input type="text" name="organizationPressure"><br>
+    日期：<input type="date" name="date"><br>
+          <input type="submit" value="增加新项目">
+</form>
+</body>
+</html>
